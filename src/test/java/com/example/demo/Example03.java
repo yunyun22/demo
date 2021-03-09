@@ -5,6 +5,9 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author wang, jinqiao
  */
@@ -17,11 +20,13 @@ public class Example03 {
         User user = new User();
         user.setName("w");
         user.setAge(1);
+        Map<String,Object> map = new HashMap<>();
 
-        MetaObject metaObject = SystemMetaObject.forObject(user);
-        Object name = metaObject.getValue("name");
-
-        System.out.println(name);
+        map.put("user",user);
+        map.put("test","test");
+        MetaObject metaObject = SystemMetaObject.forObject(map);
+        System.out.println(metaObject.getValue("user.name"));
+        System.out.println(metaObject.getValue("test"));
     }
 
 }

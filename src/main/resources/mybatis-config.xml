@@ -9,6 +9,13 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
+
+    <plugins>
+        <plugin interceptor="com.example.demo.chain.InterceptorChainAdapter"/>
+        <plugin interceptor="com.example.demo.plugin.PluginDemo"/>
+        <plugin interceptor="com.example.demo.plugin.PluginDemo2"/>
+    </plugins>
+
     <environments default="dev" >
         <environment id="dev">
             <transactionManager type="JDBC">
