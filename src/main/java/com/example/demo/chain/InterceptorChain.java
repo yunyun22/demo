@@ -15,11 +15,16 @@ public class InterceptorChain implements Process, InvocationHandler {
 
     private Object target;
 
-    private final List<Process> processes = new ArrayList<>();
+    private List<Process> processes;
 
+    private Object proxy;
 
-    public InterceptorChain() {
+    public InterceptorChain(Object target, Object proxy, List<Process> processes) {
+        this.target = target;
+        this.proxy = proxy;
+        this.processes = processes;
     }
+
 
     public void setTarget(Object target) {
         this.target = target;

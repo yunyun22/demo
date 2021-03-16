@@ -35,7 +35,9 @@ public class DynamicSqlExample {
         User entity = new User();
         entity.setPhone("18700001111");
         List<User> userList =  userMapper.getUserByEntity(entity);
-        System.out.println(userList);
+        System.out.println("first:"+userList);
+        List<User> userByEntity = userMapper.getUserByEntity(entity);
+        System.out.println("second:"+userByEntity);
         //System.out.println(JSON.toJSONString(userList));
     }
 

@@ -7,13 +7,12 @@
     <settings>
         <setting name="useGeneratedKeys" value="true"/>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="localCacheScope" value="STATEMENT"/>
     </settings>
 
 
     <plugins>
         <plugin interceptor="com.example.demo.chain.InterceptorChainAdapter"/>
-        <plugin interceptor="com.example.demo.plugin.PluginDemo"/>
-        <plugin interceptor="com.example.demo.plugin.PluginDemo2"/>
     </plugins>
 
     <environments default="dev" >

@@ -6,6 +6,8 @@ import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -20,7 +22,14 @@ import java.util.Properties;
                         args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}
                 )
         })
-public class InterceptorChainAdapter extends InterceptorChain implements Interceptor {
+public class InterceptorChainAdapter implements Interceptor {
+
+
+    private Object proxy;
+
+    private Object target;
+
+    private final List<Process> processes = new ArrayList<>();
 
     public InterceptorChainAdapter() {
         super();
@@ -28,19 +37,25 @@ public class InterceptorChainAdapter extends InterceptorChain implements Interce
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        return process(this, this, invocation.getMethod(), invocation.getArgs());
+        InterceptorChain interceptorChain = new InterceptorChain(target, proxy, processes);
+        return interceptorChain.process(interceptorChain, proxy, invocation.getMethod(), invocation.getArgs());
     }
 
     @Override
     public Object plugin(Object target) {
-        setTarget(target);
-        return Plugin.wrap(target, this);
+        Object wrap = Plugin.wrap(target, this);
+        //如果被代理
+        if (target != wrap) {
+            this.target = target;
+            this.proxy = wrap;
+        }
+        return wrap;
+
     }
 
     @Override
     public void setProperties(Properties properties) {
-
-        this.addProcess(new MyProcess1());
-        this.addProcess(new MyProcess2());
+        processes.add(new MyProcess1());
+        processes.add(new MyProcess2());
     }
 }
