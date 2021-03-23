@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver: org.hsqldb.jdbcDriver
+    url: jdbc:hsqldb:mem:mybatis
+    username: sa
+    password:

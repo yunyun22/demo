@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.User;
 import com.example.demo.exception.BusinessException;
+import com.example.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +27,16 @@ public class TestController {
 //        binder.registerCustomEditor(Date.class, new DatePropertyEditorSupport());
 //    }
 
+
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value = "/sayHello", method = RequestMethod.GET)
     @ResponseBody
-    public String sayHello(@RequestParam Date date) {
-        System.out.println(date);
-        return "hello world";
+    public String sayHello() {
+        User user = new User();
+        user.setPhone("18700001111");
+        return userService.getUserByEntity(user).toString();
     }
 
     @RequestMapping(value = "/throwException", method = RequestMethod.GET)
