@@ -3,8 +3,9 @@ package com.example.demo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.apache.ibatis.jdbc.SqlRunner;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class Example01 {
     private Connection conn = null;
 
-    @BeforeEach
+    @Before
     public void initData() {
         try {
             // 加载HSQLDB驱动

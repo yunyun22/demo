@@ -8,8 +8,8 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.session.*;
 import org.apache.ibatis.transaction.jdbc.JdbcTransaction;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ExecutorExample {
 
-    @BeforeEach
+    @Before
     public void initData() {
         DbUtils.initData();
     }
